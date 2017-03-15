@@ -46,8 +46,8 @@ var pDocReq = "1";
 //var pDocReq = "0";
 
 var loadmsg="Please Wait....";
-//var GBCServicePath = "http://tiaapp.goyalonline.in/";
-var GBCServicePath = "http://localhost:51738/";
+var GBCServicePath = "http://tiaapp.goyalonline.in/";
+//var GBCServicePath = "http://localhost:51738/";
 var pictureSource;
 var destinationType;
 var Flag ;
