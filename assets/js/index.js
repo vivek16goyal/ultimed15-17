@@ -3126,7 +3126,7 @@ function NORecord1() {
     }, 2000);
 }
 
-
+p
 
 function fun_ShowChangeList()
 {
@@ -3768,8 +3768,13 @@ var timerLongPrss;
 function list_Mousedown(eve) {
     timerLongPrss = setInterval(function () {        
         clearInterval(timerLongPrss);
-        var listitem = $(eve);      
-        RemoveItem(eve.id, listitem);        
+        var listitem = $(eve);
+        if (localStorage.getItem("FDName") == "WSAL" || localStorage.getItem("FDName") == "SALE" || localStorage.getItem("FDName") == "QTTN" || localStorage.getItem("FDName") == "QTNW") {
+            RemoveItem1(eve.id, listitem);
+        }
+        else {
+            RemoveItem(eve.id, listitem);
+        }
     }, 1000);
 }
 function list_MouseUp() {
@@ -3818,7 +3823,48 @@ function RemoveItem(a, listitem) {
         });
     }
 }
+function RemoveItem1(a, listitem) {
+    confirmAndDelete(listitem, "left", a);
+    function confirmAndDelete(listitem, transition, id) {
+        //window.localStorage.setItem("DeletAtIndex", id);
+        index_d = id;
+        // Highlight the list item that will be removed
+        listitem.children(".ui-btn").addClass("ui-btn-active");
+        // Inject topic in confirmation popup after removing any previous injected topics
+        $("#confirm .topic").remove();
 
+        $("#Div23 .topic").remove();
+       // listitem.find(".topic").clone().insertAfter("#question");
+        listitem.find(".topic").clone().insertAfter("#P3");
+        // Show the confirmation popup
+       // $("#confirm").popup("open");
+        $("#Div23").popup("open");
+        // Proceed when the user confirms
+        //$("#confirm #yes").on("click", function () {
+        //    listitem.remove();
+
+        //    RemoveItemFromCart();
+        //    $("#Itm_Grid").listview("refresh");
+
+        //});
+        $("#Div23 #yes1").on("click", function () {
+            listitem.remove();
+
+            RemoveItemFromCart();
+            $("#Itm_Grid").listview("refresh");
+
+        });
+        // Remove active state and unbind when the cancel button is clicked
+        //$("#confirm #cancel").on("click", function () {
+        //    listitem.children(".ui-btn").removeClass("ui-btn-active");
+        //    $("#confirm #yes").off();
+        //});
+        $("#Div23 #cancel1").on("click", function () {
+            listitem.children(".ui-btn").removeClass("ui-btn-active");
+            $("#Div23 #yes1").off();
+        });
+    }
+}
 function fun_showCart1() {
     fun_AddItemInCart();
     $("#info").hide();
@@ -3900,6 +3946,7 @@ function ShowNxtWind() {
         IsProcessComplete = '0';
         if (localStorage.getItem("FDName") == "WSAL") {
             if (isupdateWsale == '1') {
+                fun_nextItem();
                 fun_showCart();
             } else {
                 fun_nextItem();
@@ -3909,6 +3956,7 @@ function ShowNxtWind() {
         } else if (localStorage.getItem("FDName") == "ORDS") {
             if (isupdate == '1') {
                 fun_showCart();
+                fun_nextItem();
             } else {
                 fun_nextItem();
                 fun_showCart();
@@ -3917,6 +3965,7 @@ function ShowNxtWind() {
         } else if (localStorage.getItem("FDName") == "SALE") {
             if (isupdateSale == '1') {
                 fun_showCart();
+                fun_nextItem();
             } else {
                 fun_nextItem();
                 fun_showCart();
@@ -3925,6 +3974,7 @@ function ShowNxtWind() {
         } else if (localStorage.getItem("FDName") == "QTTN") {
             if (isupdateQTTN == '1') {
                 fun_showCart();
+                fun_nextItem();
             } else {
                 fun_nextItem();
                 fun_showCart();
@@ -3933,6 +3983,7 @@ function ShowNxtWind() {
         } else if (localStorage.getItem("FDName") == "QTNW") {
             if (isupdateQTNW == '1') {
                 fun_showCart();
+                fun_nextItem();
             } else {
                 fun_nextItem();
                 fun_showCart();
